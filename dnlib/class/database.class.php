@@ -46,23 +46,17 @@ public function insert($table,$columns,$values){
 
             $query="INSERT INTO $table($columns) VALUES($label)";
             $obj = $this->connection->prepare($query) ;
-
             $obj->bind_param($this->getBindParmsDataType($values),...$values);
             return $obj->execute();
 
-        }
-public function update($table,$columns,$values){
-
+}
+public function update($table,$columns,$values,$condition){
             $label=$this->getLabelsWithName($columns);
-
-            $query="UPDATE $table SET $label";
-            die($query);
+            $query="UPDATE $table SET $label WHERE $condition";
             $obj = $this->connection->prepare($query) ;
-
             $obj->bind_param($this->getBindParmsDataType($values),...$values);
             return $obj->execute();
-
-        }
+}
 
 
 public function read($table,$columns="*",$conditions=''){
@@ -75,9 +69,5 @@ public function delete($table,$condition){
     $query="delete from $table where $condition";
     return $this->connection->query($query);
 }
-
-
-
-
 }
 
