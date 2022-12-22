@@ -40,6 +40,11 @@ private function getLabelsWithName($columns){
     $label =substr_replace($label,'',-1);
     return $label;
 }
+public function clean($data){
+    return $this->connection->real_escape_string($data);
+}
+
+
 public function insert($table,$columns,$values){
 
             $label=$this->getLabels($values);
