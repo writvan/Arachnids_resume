@@ -1,5 +1,5 @@
 <div class="container my-3">
-  <h1 class="my-3">Enter your Details</h1>
+  <h1 class="my-3 fs-3" align="left">Enter your Details</h1>
   <form method="post" action="<?=$action->helper->url('action/createresume')?>" class="border border-2 rounded-2 p-2">
   <p align="left" class="fs-4"><i class="bi bi-person-badge-fill"></i> Personal details</p>
       <div class="row justify-content-between">
@@ -88,9 +88,7 @@
 
       </div>
       <span class="d-block mt-2">About your work</span>
-      <textarea id="work_desc"  class="w-100 my-2">
-
-      </textarea>
+      <textarea id="work_desc"  class="w-100 my-2"></textarea>
       <button type="button" class="btn btn-primary" id="addexp">Add <i class="bi bi-plus-circle-fill"></i></button>
     </div>
 

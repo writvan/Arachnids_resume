@@ -18,7 +18,7 @@
     if(@$type==1){ 
         ?> 
 	    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all" />
-        <!-- <link rel="stylesheet" href="<?=$action->helper->loadcss('builder_content_1.css')?>"> -->
+        <link rel="stylesheet" href="<?=$action->helper->loadcss('builder_content_1.css')?>">
         <?php
     }
     ?>

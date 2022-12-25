@@ -1,18 +1,58 @@
+<?php
+$resume['contact']=str_replace('\\',"",$resume['contact']);
+$resume['skills']=str_replace('\\',"",$resume['skills']);
+$resume['works']=str_replace('\\',"",$resume['experience']);
+$resume['education']=str_replace('\\',"",$resume['education']);
+
+$contact=json_decode($resume['contact']);
+$skills=json_decode($resume['skills']);
+$works=json_decode($resume['works']);
+$education=json_decode($resume['education']);
+
+?>
+
+
+
+
+ <!--?php...-->
+ <!--echo "<pre>";...-->
+ <!--print_r($data);...-->
+
+ <!--echo $username;...-->  
+ <!--?>...-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all" />
+        <link rel="stylesheet" href="<?=$action->helper->loadcss('builder_content_1.css')?>">
+
+
+    <link rel="icon" href="<?=$action->helper->loadimage('logo.png')?>">
+    <title><?=@$title?></title>      <!--@ is used so that we get the page even without passing correct value...-->        
+</head>
+<body>
+
+
+
 <div id="doc2" class="yui-t7">
 	<div id="inner">
 	
 		<div id="hd">
 			<div class="yui-gc">
 				<div class="yui-u first">
-					<h1>Jonathan Doe</h1>
-					<h2>Web Designer, Director</h2>
+					<h1><?=@$resume['name']?></h1>
+					<h2><?=@$resume['headline']?></h2>
 				</div>
 
 				<div class="yui-u">
 					<div class="contact-info">
-						<h3><a id="pdf" href="#">Download PDF</a></h3>
-						<h3><a href="mailto:name@yourdomain.com">name@yourdomain.com</a></h3>
-						<h3>(313) - 867-5309</h3>
+						<h3><a id="pdf" href="#"><?=$contact->mobile?></a></h3>
+						<h3><a href="mailto:name@yourdomain.com"><?=$contact->email?></a></h3>
+						<h3><?=$contact->address?></h3>
 					</div><!--// .contact-info -->
 				</div>
 			</div><!--// .yui-gc -->
@@ -24,11 +64,11 @@
 
 					<div class="yui-gf">
 						<div class="yui-u first">
-							<h2>Profile</h2>
+							<h2>Objective</h2>
 						</div>
 						<div class="yui-u">
 							<p class="enlarge">
-								Progressively evolve cross-platform ideas before impactful infomediaries. Energistically visualize tactical initiatives before cross-media catalysts for change. 
+							<?=$resume['objective']?>
 							</p>
 						</div>
 					</div><!--// .yui-gf -->
@@ -38,46 +78,17 @@
 							<h2>Skills</h2>
 						</div>
 						<div class="yui-u">
-
-								<div class="talent">
-									<h2>Web Design</h2>
-									<p>Assertively exploit wireless initiatives rather than synergistic core competencies.	</p>
-								</div>
-
-								<div class="talent">
-									<h2>Interface Design</h2>
-									<p>Credibly streamline mission-critical value with multifunctional functionalities.	 </p>
-								</div>
-
-								<div class="talent">
-									<h2>Project Direction</h2>
-									<p>Proven ability to lead and manage a wide variety of design and development projects in team and independent situations.</p>
-								</div>
-						</div>
-					</div><!--// .yui-gf -->
-
-					<div class="yui-gf">
-						<div class="yui-u first">
-							<h2>Technical</h2>
-						</div>
-						<div class="yui-u">
+						<?php
+						foreach($skills as $skill){
+							?>
 							<ul class="talent">
-								<li>XHTML</li>
-								<li>CSS</li>
-								<li class="last">Javascript</li>
+							<li><?=$skill?></li>
 							</ul>
 
-							<ul class="talent">
-								<li>Jquery</li>
-								<li>PHP</li>
-								<li class="last">CVS / Subversion</li>
-							</ul>
+							<?php
+						}
+						?>
 
-							<ul class="talent">
-								<li>OS X</li>
-								<li>Windows XP/Vista</li>
-								<li class="last">Linux</li>
-							</ul>
 						</div>
 					</div><!--// .yui-gf-->
 
@@ -88,36 +99,29 @@
 						</div><!--// .yui-u -->
 
 						<div class="yui-u">
+<?php
+if(count($works)<1){
+	?>
+	<div class="job">
+								<h3>Fresher</h3>
 
-							<div class="job">
-								<h2>Facebook</h2>
-								<h3>Senior Interface Designer</h3>
-								<h4>2005-2007</h4>
-								<p>Intrinsicly enable optimal core competencies through corporate relationships. Phosfluorescently implement worldwide vortals and client-focused imperatives. Conveniently initiate virtual paradigms and top-line convergence. </p>
 							</div>
-
-							<div class="job">
-								<h2>Apple Inc.</h2>
-								<h3>Senior Interface Designer</h3>
-								<h4>2005-2007</h4>
-								<p>Progressively reconceptualize multifunctional "outside the box" thinking through inexpensive methods of empowerment. Compellingly morph extensive niche markets with mission-critical ideas. Phosfluorescently deliver bricks-and-clicks strategic theme areas rather than scalable benefits. </p>
+	<?php
+}
+foreach($works as $work){
+	?>
+	<div class="job">
+								<h2><?=$work->company?></h2>
+								<h3><?=$work->jobrole?></h3>
+								<h4><?=$work->w_duration?></h4>
+								<p><?=$work->work_desc?></p>
 							</div>
+	<?php
+}
+?>
+							
 
-							<div class="job">
-								<h2>Microsoft</h2>
-								<h3>Principal and Creative Lead</h3>
-								<h4>2004-2005</h4>
-								<p>Intrinsicly transform flexible manufactured products without excellent intellectual capital. Energistically evisculate orthogonal architectures through covalent action items. Assertively incentivize sticky platforms without synergistic materials. </p>
-							</div>
-
-
-							<div class="job last">
-								<h2>International Business Machines (IBM)</h2>
-								<h3>Lead Web Designer</h3>
-								<h4>2001-2004</h4>
-								<p>Globally re-engineer cross-media schemas through viral methods of empowerment. Proactively grow long-term high-impact human capital and highly efficient innovation. Intrinsicly iterate excellent e-tailers with timely e-markets.</p>
-							</div>
-
+							
 						</div><!--// .yui-u -->
 					</div><!--// .yui-gf -->
 
@@ -126,10 +130,18 @@
 						<div class="yui-u first">
 							<h2>Education</h2>
 						</div>
-						<div class="yui-u">
-							<h2>Indiana University - Bloomington, Indiana</h2>
-							<h3>Dual Major, Economics and English &mdash; <strong>4.0 GPA</strong> </h3>
+<?php
+foreach($education as $ed){
+	?>
+							<div class="yui-u">
+							<h2><?=$ed->college?></h2>
+							<h3><?=$ed->course?>&mdash; <strong><?=$ed->gpa?></strong>(<?=$ed->e_duration?>)</h3>
 						</div>
+
+	<?php
+}
+?>
+
 					</div><!--// .yui-gf -->
 
 
@@ -138,7 +150,7 @@
 		</div><!--// bd -->
 
 		<div id="ft">
-			<p>Jonathan Doe &mdash; <a href="mailto:name@yourdomain.com">name@yourdomain.com</a> &mdash; (313) - 867-5309</p>
+			<p><?=$resume['name']?>&mdash; <a href="<?=$contact->email?>"><?=$contact->email?></a> &mdash;<?=$contact->mobile?></p>
 		</div><!--// footer -->
 
 	</div><!-- // inner -->

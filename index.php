@@ -49,19 +49,26 @@ $action->helper->route('select-template',function(){
     });
 
 
-$action->helper->route('builder/$type',function($data){
+$action->helper->route('resume/$url',function($data){
     global $action;
-    $action->onlyForAuthUser();
-    $data['title']="Type ".$data['type']." Resume";
-    $data['myresume']='active';
-        $action->view->load('header',$data);
-        $action->view->load('navbar',$data);
+    $resumedata=$action->db->read("resumes","*","WHERE url='".$data['url']."'");
+    
+    if(!$resumedata){
+        $action->helper->redirect('home');
+    }
+    $resumedata=$resumedata[0];
+
+
+    $data['title']=$resumedata['name'];
+    $data['type']=1;
+$data['resume']=$resumedata;
+
 if($data['type']==1){
-    $action->view->load('builder_content_1');
+    $action->view->load('builder_content_1',$data);
 }else{
     $action->helper->redirect('home');
 }
-        $action->view->load('footer');
+
         //$action->view->load('header',["title"=>"heading test",'heading'=>"this is the new heading"]); //top title of the web page
     
     });
@@ -80,28 +87,28 @@ $action->helper->route('action/createresume',function(){
     $contact['mobile']=$action->db->clean($_POST['mobile']);
     $contact['address']=$action->db->clean($_POST['address']);
 
-    $resume_data[3]=$action->db->clean(json_encode($contact));
+    $resume_data[3]=json_encode($contact);
     
-    $resume_data[5]=$action->db->clean(json_encode($_POST['skill']));
+    $resume_data[5]=json_encode($_POST['skill']);
     $education=array();
     $work=array();
 
     foreach($_POST['college'] as $key=>$value){
-        $education[$key]['college']=$value;
-        $education[$key]['course']=$_POST['course'][$key];
-        $education[$key]['gpa']=$_POST['gpa'][$key];
-        $education[$key]['e_duration']=$_POST['e_duration'][$key];
+        $education[$key]['college']=$action->db->clean($value);
+        $education[$key]['course']=$action->db->clean($_POST['course'][$key]);
+        $education[$key]['gpa']=$action->db->clean($_POST['gpa'][$key]);
+        $education[$key]['e_duration']=$action->db->clean($_POST['e_duration'][$key]);
     }
 
     foreach($_POST['company'] as $key=>$value){
-        $work[$key]['company']=$value;
-        $work[$key]['jobrole']=$_POST['jobrole'][$key];
-        $work[$key]['w_duration']=$_POST['w_duration'][$key];
-        $work[$key]['work_desc']=$_POST['work_desc'][$key];
+        $work[$key]['company']=$action->db->clean($value);
+        $work[$key]['jobrole']=$action->db->clean($_POST['jobrole'][$key]);
+        $work[$key]['w_duration']=$action->db->clean($_POST['w_duration'][$key]);
+        $work[$key]['work_desc']=$action->db->clean($_POST['work_desc'][$key]);
     }
 
-    $resume_data[6]=$action->db->clean(json_encode($work));
-    $resume_data[7]=$action->db->clean(json_encode($education));
+    $resume_data[6]=json_encode($work);
+    $resume_data[7]=json_encode($education);
     $resume_data[8]=$action->helper->UID();
 
   $run=$action->db->insert('resumes','user_id,name,headline,objective,contact,skills,experience,education,url',$resume_data);
