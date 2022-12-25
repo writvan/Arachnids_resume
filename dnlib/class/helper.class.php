@@ -6,6 +6,11 @@ public static $isPageIsAvailable=false;
     public function loadcss($file_name){
         return ASSET_URL.'css/'.$file_name.'?v='.time();        
     }
+    public function UID(){
+        $str='xyzqwtyu'.time();
+        return str_shuffle($str);
+    } 
+
     public function redirect($route){
         header("location:".SITE_URL.$route);
     }

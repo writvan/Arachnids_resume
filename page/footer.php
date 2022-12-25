@@ -107,13 +107,13 @@ $('#gpa').val('');
 $('#e_duration').val('');
 });
 
-
+//experience
 
 $("#addexp").click(function(){
   var company=$('#company').val();
   var jobrole=$('#jobrole').val();
   var w_duration=$('#w_duration').val();
-  var about=$('#work_desc').val();
+  var work_desc=$('#work_desc').val();
 
   if(!company){
     Toast.fire({
@@ -132,26 +132,25 @@ return;
   if(!w_duration){
     Toast.fire({
   icon: 'error',
-  title: 'enter course duration',
+  title: 'enter work duration',
 });
 return;
   }
+
 
 $("#exps").append(`<div class="d-inline-block border rounded p-2 my-2">
 <input type ="hidden" name="company[]" value="${company}">
 <input type ="hidden" name="jobrole[]" value="${jobrole}">
 <input type ="hidden" name="w_duration[]" value="${w_duration}">
-<textarea class="d-none" name="workdesc[]">
-${about}
-</textarea>
+<textarea class="d-none" name="workdesc[]"> ${work_desc}  </textarea>
         <h3>${company}</h3>
         <p> ${jobrole} - ${w_duration} </p>
-        <p> ${about} </p>
+        <p> ${work_desc} </p>
         <button type="button" class="btn btn-sm btn-danger" onclick="removeexp(this)">Remove</button>
       </div>`)
 $('#company').val('');
 $('#jobrole').val('');
-$('#e_duration').val('');
+$('#w_duration').val('');
 $('#work_desc').val('');
 });
 

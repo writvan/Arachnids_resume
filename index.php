@@ -66,6 +66,58 @@ if($data['type']==1){
     
     });
 
+    
+$action->helper->route('action/createresume',function(){
+    global $action;
+    $action->onlyForAuthUser();
+    $resume_data[0]=$action->session->get('Auth')['data']['id'];
+    $resume_data[1]=$action->db->clean($_POST['name']);
+    $resume_data[2]=$action->db->clean($_POST['headline']);
+    $resume_data[4]=$action->db->clean($_POST['objective']);
+
+
+    $contact['email']=$action->db->clean($_POST['email']);
+    $contact['mobile']=$action->db->clean($_POST['mobile']);
+    $contact['address']=$action->db->clean($_POST['address']);
+
+    $resume_data[3]=$action->db->clean(json_encode($contact));
+    
+    $resume_data[5]=$action->db->clean(json_encode($_POST['skill']));
+    $education=array();
+    $work=array();
+
+    foreach($_POST['college'] as $key=>$value){
+        $education[$key]['college']=$value;
+        $education[$key]['course']=$_POST['course'][$key];
+        $education[$key]['gpa']=$_POST['gpa'][$key];
+        $education[$key]['e_duration']=$_POST['e_duration'][$key];
+    }
+
+    foreach($_POST['company'] as $key=>$value){
+        $work[$key]['company']=$value;
+        $work[$key]['jobrole']=$_POST['jobrole'][$key];
+        $work[$key]['w_duration']=$_POST['w_duration'][$key];
+        $work[$key]['work_desc']=$_POST['work_desc'][$key];
+    }
+
+    $resume_data[6]=$action->db->clean(json_encode($work));
+    $resume_data[7]=$action->db->clean(json_encode($education));
+    $resume_data[8]=$action->helper->UID();
+
+  $run=$action->db->insert('resumes','user_id,name,headline,objective,contact,skills,experience,education,url',$resume_data);
+  if($run){
+    $action->session->set('success','Resume created!');
+    $action->helper->redirect('home');
+  }else{
+    $action->session->set('error','Something went wrong try again later');
+    $action->helper->redirect('home');
+
+
+  }
+    // $action->session->set('success','account created');
+    // $action->helper->redirect('login');
+ 
+    });
 
 //for logout
 $action->helper->route('action/logout',function(){
@@ -79,11 +131,12 @@ $action->helper->route('action/logout',function(){
 $action->helper->route('home',function(){
     global $action;
     $action->onlyForAuthUser();
-    $data['title']='home';
+    $data['title']='home'; 
     $data['myresume']='active';
+    $data['resumes']=$action->db->read('resumes','*',"WHERE user_id=".$action->user_id());
         $action->view->load('header',$data);
         $action->view->load('navbar',$data);
-        $action->view->load('home_content');
+        $action->view->load('home_content',$data);
         $action->view->load('footer');
         //$action->view->load('header',["title"=>"heading test",'heading'=>"this is the new heading"]); //top title of the web page
     
