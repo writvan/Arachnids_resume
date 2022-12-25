@@ -13,7 +13,7 @@
       <label for="floatingPassword">Password</label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
-    <a href="<?=$action->helper->url('signup')?>" class="mt-5">create new account</a>
+    <a href="<?=$action->helper->url('signup')?>" class="d-block mt-3 text-decoration-none">create new account</a>
     <p class="mt-5 mb-3 text-muted">&copy; Team Arachnids 2022</p>
   </form>
 </main>

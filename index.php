@@ -11,6 +11,62 @@ $data['title']='resume layer - make and share resume online';
 
 });
 
+//for template type 1
+$action->helper->route('resume-details/$type',function($data){
+    global $action;
+    $action->onlyForAuthUser(); 
+    $data['title']="Resume details";
+    $data['myresume']='active';
+        $action->view->load('header',$data);
+        $action->view->load('navbar',$data);
+    if($data['type']==1){
+        $action->view->load('resume_details_1');
+    }else{
+        $action->helper->redirect('select-template');
+        $action->session->set('error','invalid resume type');
+    }
+        $action->view->load('footer');
+        //$action->view->load('header',["title"=>"heading test",'heading'=>"this is the new heading"]); //top title of the web page
+    
+    });
+
+
+//for template
+$action->helper->route('select-template',function(){
+    global $action;
+    $action->onlyForAuthUser();
+    $data['title']="Select Resume Template";
+    $data['myresume']='active';
+        $action->view->load('header',$data);
+        $action->view->load('navbar',$data);
+
+    $action->view->load('template_content');
+
+
+        $action->view->load('footer');
+        //$action->view->load('header',["title"=>"heading test",'heading'=>"this is the new heading"]); //top title of the web page
+    
+    });
+
+
+$action->helper->route('builder/$type',function($data){
+    global $action;
+    $action->onlyForAuthUser();
+    $data['title']="Type ".$data['type']." Resume";
+    $data['myresume']='active';
+        $action->view->load('header',$data);
+        $action->view->load('navbar',$data);
+if($data['type']==1){
+    $action->view->load('builder_content_1');
+}else{
+    $action->helper->redirect('home');
+}
+        $action->view->load('footer');
+        //$action->view->load('header',["title"=>"heading test",'heading'=>"this is the new heading"]); //top title of the web page
+    
+    });
+
+
 //for logout
 $action->helper->route('action/logout',function(){
     global $action;
@@ -23,9 +79,11 @@ $action->helper->route('action/logout',function(){
 $action->helper->route('home',function(){
     global $action;
     $action->onlyForAuthUser();
-    $data['title']='Welcome to home';
+    $data['title']='home';
+    $data['myresume']='active';
         $action->view->load('header',$data);
-        $action->view->load('content');
+        $action->view->load('navbar',$data);
+        $action->view->load('home_content');
         $action->view->load('footer');
         //$action->view->load('header',["title"=>"heading test",'heading'=>"this is the new heading"]); //top title of the web page
     
@@ -137,5 +195,10 @@ $action->helper->route('action/signup',function(){
 
 
 if(!helper::$isPageIsAvailable){
-    echo "page not found";
+    $data['title']='No Page found';
+    $data['myresume']='active';
+        $action->view->load('header',$data);
+        $action->view->load('navbar',$data);
+        $action->view->load('not_found');
+        $action->view->load('footer');
 }
