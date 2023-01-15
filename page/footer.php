@@ -87,7 +87,7 @@ return;
   if(!gpa){
     Toast.fire({
   icon: 'error',
-  title: 'enter the cgpa',
+  title: 'enter the marks details',
 });
 return;
   }
@@ -133,6 +133,13 @@ return;
     Toast.fire({
   icon: 'error',
   title: 'enter work duration',
+});
+return;
+  }
+  if(!work_desc){
+    Toast.fire({
+  icon: 'error',
+  title: 'enter a work description',
 });
 return;
   }

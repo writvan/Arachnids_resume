@@ -67,7 +67,7 @@
       <div class="d-flex gap-2">
         <input type="text"  class="form-control" id="college"  placeholder="Institute" >
         <input type="text"  class="form-control" id="course" placeholder="Course" >
-        <input type="text"  class="form-control" id="gpa" placeholder="CGPA">
+        <input type="text"  class="form-control" id="gpa" placeholder="Marks Details">
         <input type="text"  class="form-control" id="e_duration" placeholder="time period">
         <button type="button" class="btn btn-primary" id="addeducation">Add <i class="bi bi-plus-circle-fill"></i></button>
       </div>
@@ -85,7 +85,7 @@
         <input type="text"  class="form-control" id="company"  placeholder="enter the company">
         <input type="text"  class="form-control" id="jobrole" placeholder="enter you role">
         <input type="text"  class="form-control" id="w_duration" placeholder="work duration">
-
+        
       </div>
       <span class="d-block mt-2">About your work</span>
       <textarea id="work_desc"  class="w-100 my-2"></textarea>

@@ -34,8 +34,9 @@ private function getLabels($values){
 private function getLabelsWithName($columns){
     $label="";
     $columns=explode(',',$columns);
+
     foreach($columns as $column){
-        $label.=$column.='?,';
+        $label.=$column.'=?,';
     } 
     $label =substr_replace($label,'',-1);
     return $label;
