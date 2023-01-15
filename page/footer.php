@@ -98,7 +98,7 @@ $("#educations").append(`<div class="d-inline-block border rounded p-2 my-2">
 <input type ="hidden" name="gpa[]" value="${gpa}">
 <input type ="hidden" name="e_duration[]" value="${e_duration}">
         <h3>${college}</h3>
-        <p> ${course} with CGPA- ${gpa} in ${e_duration} </p>
+        <p> ${course} with ${gpa} in ${e_duration} </p>
         <button type="button" class="btn btn-sm btn-danger" onclick="removeeducation(this)">Remove</button>
       </div>`)
 $('#college').val('');
