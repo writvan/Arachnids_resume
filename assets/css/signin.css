@@ -1,0 +1,24 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+        background-color:rgba(1.0000000591389835, 13.000000175088644, 52.000000700354576, 1);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: "Open Sans", sans-serif;
+}
+.grid1{
+  margin: 0 auto;
+  width: 80%;
+  
+}
+@media (max-width: 980px) {
+    .grid1 {
+      flex-flow: wrap;
+      text-align: center;
+      align-content: center;
+      align-items: center;
+    }
+}

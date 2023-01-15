@@ -1,8 +1,9 @@
    
 <main class="form-signin text-center m-auto">
   <form method="post" action="<?=$action->helper->url('action/signup')?>">
+  <link href="<?=$action->helper->loadcss('signin.css')?>" rel="stylesheet" type="text/css">
     <img class="mb-4" src="<?=$action->helper->loadimage('logo.png')?>" alt="" width="82" height="87">
-    <h1 class="h3 mb-3 fw-normal">Create New Account</h1>
+    <h1 class="h3 mb-3 fw-normal" style="color: #ffffff;">Create New Account</h1>
     <div class="form-floating">
       <input type="name" class="form-control" id="floatingInput" name="full_name" placeholder="writvan">
       <label for="floatingInput">Full name</label>

@@ -2,7 +2,8 @@
 <main class="form-signin text-center m-auto">
   <form method="post" action="<?=$action->helper->url('action/login')?>">
     <img class="mb-4" src="<?=$action->helper->loadimage('logo.png')?>" alt="" width="82" height="87">
-    <h1 class="h3 mb-3 fw-normal">Login Now</h1>
+    <link href="<?=$action->helper->loadcss('signin.css')?>" rel="stylesheet" type="text/css">
+    <h1 class="h3 mb-3 fw-normal" style="color: #ffffff;">Login Now</h1>
 
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" name="email_id" placeholder="name@example.com" required>

@@ -10,17 +10,6 @@ $works=json_decode($resume['works']);
 $education=json_decode($resume['education']);
 
 ?>
-
-
-
-
- <!--?php...-->
- <!--echo "<pre>";...-->
- <!--print_r($data);...-->
-
- <!--echo $username;...-->  
- <!--?>...-->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,7 +91,7 @@ $education=json_decode($resume['education']);
 <?php
 if(count($works)<1){
 	?>
-	<div class="job">
+	<div class="job last">
 								<h3>Fresher</h3>
 
 							</div>
@@ -133,7 +122,7 @@ foreach($works as $work){
 <?php
 foreach($education as $ed){
 	?>
-							<div class="yui-u">
+							<div class="yui-u" style="padding:10px 0px;border-bottom:1px solid rgba(0,0,0,0.1)">
 							<h2><?=$ed->college?></h2>
 							<h3><?=$ed->course?>&mdash; <strong><?=$ed->gpa?></strong>(<?=$ed->e_duration?>)</h3>
 						</div>

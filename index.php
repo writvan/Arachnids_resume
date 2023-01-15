@@ -126,6 +126,16 @@ $action->helper->route('action/createresume', function () {
 
 });
 
+//for delete resume
+$action->helper->route('action/deleteresume/$url', function ($data){
+    global $action;
+    $url = $data['url'];
+    $action->db->delete('resumes',"url='$url'");
+    $action->session->set('success','resume deleted !');
+    $action->helper->redirect('home');
+    });
+
+
 //for logout
 $action->helper->route('action/logout', function () {
     global $action;

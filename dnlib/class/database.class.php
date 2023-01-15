@@ -72,7 +72,7 @@ public function read($table,$columns="*",$conditions=''){
 
 }
 public function delete($table,$condition){
-    $query="delete from $table where $condition";
+    $query="DELETE FROM $table WHERE $condition";
     return $this->connection->query($query);
 }
 }
